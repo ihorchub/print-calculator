@@ -7,7 +7,7 @@ export const App = () => {
   return (
     <>
       <div>
-        <p>calculator</p>
+        <p>calculator print</p>
       </div>
       <GlobalStyle />
     </>
