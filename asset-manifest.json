@@ -1,13 +1,10 @@
 {
   "files": {
-    "main.css": "/print-calculator/static/css/main.c3d5249d.css",
-    "main.js": "/print-calculator/static/js/main.c7ff98d3.js",
+    "main.js": "/print-calculator/static/js/main.9e875140.js",
     "index.html": "/print-calculator/index.html",
-    "main.c3d5249d.css.map": "/print-calculator/static/css/main.c3d5249d.css.map",
-    "main.c7ff98d3.js.map": "/print-calculator/static/js/main.c7ff98d3.js.map"
+    "main.9e875140.js.map": "/print-calculator/static/js/main.9e875140.js.map"
   },
   "entrypoints": [
-    "static/css/main.c3d5249d.css",
-    "static/js/main.c7ff98d3.js"
+    "static/js/main.9e875140.js"
   ]
 }
