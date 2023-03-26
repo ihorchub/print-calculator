@@ -154,22 +154,3 @@ export const printingPriceOptions = [
     ],
   },
 ];
-
-export const dataInput = [
-  { title: 'Ширина файлу', label: 'мм' },
-  { title: 'Довжина файлу', label: 'мм' },
-  { title: 'Кількість файлів', label: 'шт' },
-  { title: 'Ширина матеріалу', label: 'мм' },
-  { title: 'Довжина матеріалу', label: 'мм' },
-];
-
-export const lamination = ['Так', 'Ні'];
-
-export const dataOutput = [
-  { title: 'Площа друку', label: 'м.кв.' },
-  { title: 'Площа залишку', label: 'м.кв.' },
-  { title: 'Площа ламінації', label: 'м.кв.' },
-  { title: 'Вартість друку, грн.', label: 'Width' },
-  { title: 'Вартість залишку, грн.', label: 'Height' },
-  { title: 'Вартість ламінації, грн.', label: 'Height' },
-];

@@ -7,59 +7,56 @@ import { OneElement } from 'components/OneElement/OneElement';
 
 export const App = () => {
   const [quality, setQuality] = useState([]);
-  const [materialСost, setMaterialСost] = useState('');
+  const [qualityValue, setQualityValue] = useState('');
   const [printingPrice, setPrintingPrice] = useState('');
 
   return (
-    <Grid p="0 16px">
-      <Grid container spacing={2} columns={15}>
+    <Grid p="16px 32px">
+      <Grid container spacing={2}>
         <Grid item xs={8}>
-          <p>Оберіть матеріал</p>
+          <p>Оберіть матеріал*</p>
           <Autocomplete
             size="small"
             options={printingPriceOptions}
             getOptionLabel={option => option.material}
             renderInput={params => (
-              <TextField {...params} label="Printing material" />
+              <TextField {...params} label="Обраний матеріал" />
             )}
             onChange={(_, newValue) => {
               setQuality(newValue.quality);
-              setMaterialСost(newValue.material_cost);
-            }}
-          />
-        </Grid>
-        <Grid item xs={3}>
-          <p>Оберіть якість друку</p>
-          <Autocomplete
-            size="small"
-            options={quality}
-            getOptionLabel={option => option.label}
-            renderInput={params => <TextField {...params} label="Quality" />}
-            onChange={(_, newValue) => {
-              setPrintingPrice(newValue.price);
+              setPrintingPrice('');
+              setQualityValue('');
             }}
           />
         </Grid>
         <Grid item xs={2}>
-          <p>Друк</p>
+          <p>Оберіть якість друку*</p>
+          <Autocomplete
+            inputValue={qualityValue}
+            size="small"
+            options={quality}
+            getOptionLabel={option => option.label}
+            renderInput={params => (
+              <TextField {...params} label="Обрана якість" />
+            )}
+            onChange={(_, newValue) => {
+              setPrintingPrice(newValue.price);
+              setQualityValue(newValue.label);
+            }}
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <p>Вартість друку 1 м.кв.</p>
           <TextField
             size="small"
-            label="Print"
+            label="грн."
             variant="outlined"
             value={printingPrice}
           />
         </Grid>
-        <Grid item xs={2}>
-          <p>Залишок</p>
-          <TextField
-            size="small"
-            label="Material"
-            variant="outlined"
-            value={materialСost}
-          />
-        </Grid>
       </Grid>
-      <OneElement />
+      <p>Введіть будь ласка параметри зображення для друку</p>
+      <OneElement price={printingPrice} />
     </Grid>
   );
 };
