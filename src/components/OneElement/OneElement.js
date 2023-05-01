@@ -1,4 +1,4 @@
-import { Grid, TextField, Autocomplete, Typography } from '@mui/material';
+import { Grid, TextField, Autocomplete } from '@mui/material';
 import { useState, useEffect } from 'react';
 
 export const OneElement = ({ price }) => {
@@ -21,9 +21,6 @@ export const OneElement = ({ price }) => {
   return (
     <Grid container spacing={2} columns={8}>
       <Grid item xs={1}>
-        <Typography variant="body2" mb={1}>
-          Ширина*
-        </Typography>
         <TextField
           size="small"
           label="мм"
@@ -35,9 +32,6 @@ export const OneElement = ({ price }) => {
         />
       </Grid>
       <Grid item xs={1}>
-        <Typography variant="body2" mb={1}>
-          Довжина*
-        </Typography>
         <TextField
           size="small"
           label="мм"
@@ -49,9 +43,6 @@ export const OneElement = ({ price }) => {
         />
       </Grid>
       <Grid item xs={1}>
-        <Typography variant="body2" mb={1}>
-          Кількість
-        </Typography>
         <TextField
           size="small"
           label="шт"
@@ -63,15 +54,9 @@ export const OneElement = ({ price }) => {
         />
       </Grid>
       <Grid item xs={1}>
-        <Typography variant="body2" mb={1}>
-          Площа
-        </Typography>
         <TextField size="small" label="м.кв." variant="outlined" value={sqrt} />
       </Grid>
       <Grid item xs={1}>
-        <Typography variant="body2" mb={1}>
-          Вартість друку
-        </Typography>
         <TextField
           size="small"
           label="грн."
@@ -80,9 +65,6 @@ export const OneElement = ({ price }) => {
         />
       </Grid>
       <Grid item xs={1}>
-        <Typography variant="body2" mb={1}>
-          Ламінація
-        </Typography>
         <Autocomplete
           value={isLamination}
           size="small"
@@ -95,15 +77,9 @@ export const OneElement = ({ price }) => {
         />
       </Grid>
       <Grid item xs={1}>
-        <Typography variant="body2" mb={1}>
-          Вартість ламінації
-        </Typography>
         <TextField size="small" label="грн." variant="outlined" />
       </Grid>
       <Grid item xs={1}>
-        <Typography variant="body2" mb={1}>
-          Вартість замовлення
-        </Typography>
         <TextField size="small" label="грн." variant="outlined" />
       </Grid>
     </Grid>
