@@ -9,6 +9,7 @@ export const printingPriceOptions = [
       { label: 'standart1440', price: '190' },
       { label: 'top1440', price: '245' },
     ],
+    lamination_cost: '110',
   },
   {
     id: '2',
@@ -20,6 +21,7 @@ export const printingPriceOptions = [
       { label: 'standart1440', price: '210' },
       { label: 'top1440', price: '265' },
     ],
+    lamination_cost: '110',
   },
   {
     id: '3',
@@ -31,6 +33,7 @@ export const printingPriceOptions = [
       { label: 'standart1440', price: '205' },
       { label: 'top1440', price: '260' },
     ],
+    lamination_cost: '110',
   },
   {
     id: '4',
@@ -42,6 +45,7 @@ export const printingPriceOptions = [
       { label: 'standart1440', price: '220' },
       { label: 'top1440', price: '275' },
     ],
+    lamination_cost: '110',
   },
   {
     id: '5',
@@ -53,6 +57,7 @@ export const printingPriceOptions = [
       { label: 'standart1440', price: '250' },
       { label: 'top1440', price: '305' },
     ],
+    lamination_cost: '110',
   },
   {
     id: '6',
@@ -64,6 +69,7 @@ export const printingPriceOptions = [
       { label: 'standart1440', price: '185' },
       { label: 'top1440', price: '240' },
     ],
+    lamination_cost: '110',
   },
   {
     id: '7',
@@ -75,6 +81,7 @@ export const printingPriceOptions = [
       { label: 'standart1440', price: '210' },
       { label: 'top1440', price: '265' },
     ],
+    lamination_cost: '110',
   },
   {
     id: '8',
@@ -86,6 +93,7 @@ export const printingPriceOptions = [
       { label: 'standart1440', price: '320' },
       { label: 'top1440', price: '375' },
     ],
+    lamination_cost: '110',
   },
   {
     id: '9',
@@ -97,6 +105,7 @@ export const printingPriceOptions = [
       { label: 'standart1440', price: '450' },
       { label: 'top1440', price: '505' },
     ],
+    lamination_cost: '110',
   },
   {
     id: '10',
@@ -108,6 +117,7 @@ export const printingPriceOptions = [
       { label: 'standart1440', price: '245' },
       { label: 'top1440', price: '300' },
     ],
+    lamination_cost: '110',
   },
   {
     id: '11',
@@ -119,6 +129,7 @@ export const printingPriceOptions = [
       { label: 'standart1440', price: '130' },
       { label: 'top1440', price: '185' },
     ],
+    lamination_cost: '110',
   },
   {
     id: '12',
@@ -130,6 +141,7 @@ export const printingPriceOptions = [
       { label: 'standart1440', price: '115' },
       { label: 'top1440', price: '170' },
     ],
+    lamination_cost: '110',
   },
   {
     id: '13',
@@ -141,6 +153,7 @@ export const printingPriceOptions = [
       { label: 'standart1440', price: '465' },
       { label: 'top1440', price: '520' },
     ],
+    lamination_cost: '110',
   },
   {
     id: '14',
@@ -152,5 +165,6 @@ export const printingPriceOptions = [
       { label: 'standart1440', price: '115' },
       { label: 'top1440', price: '170' },
     ],
+    lamination_cost: '110',
   },
 ];

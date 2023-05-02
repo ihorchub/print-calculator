@@ -1,22 +1,43 @@
 import { Grid, TextField, Autocomplete } from '@mui/material';
 import { useState, useEffect } from 'react';
 
-export const OneElement = ({ price }) => {
-  const [isLamination, setIsLamination] = useState('Ні');
+export const OneElement = ({ printingPrice, laminationPrice }) => {
   const [width, setWidth] = useState('');
   const [height, setHeight] = useState('');
   const [count, setCount] = useState('');
   const [sqrt, setSqrt] = useState('');
   const [printCost, setPrintCost] = useState('');
+  const [isLamination, setIsLamination] = useState('Ні');
+  const [laminationCost, setLaminationCost] = useState('');
+  const [orderPrice, setOrderPrice] = useState('');
 
   useEffect(() => {
-    const itemSqrt = () =>
+    const itemSqrt =
       (Number(width) / 1000) * (Number(height) / 1000) * Number(count);
+    const calculatePrintCost = sqrt * printingPrice;
+    const calculateLamination = sqrt * laminationPrice;
 
-    const calculatePrintCost = () => sqrt * price;
-    setSqrt(itemSqrt());
-    setPrintCost(calculatePrintCost());
-  }, [width, height, count, sqrt, price]);
+    setSqrt(itemSqrt.toFixed(2));
+    setPrintCost(calculatePrintCost.toFixed(0));
+
+    if (isLamination === 'Так') {
+      setLaminationCost(calculateLamination.toFixed(0));
+    } else {
+      setLaminationCost('0');
+    }
+
+    setOrderPrice(Number(printCost) + Number(laminationCost));
+  }, [
+    width,
+    height,
+    count,
+    sqrt,
+    printingPrice,
+    laminationPrice,
+    printCost,
+    laminationCost,
+    isLamination,
+  ]);
 
   return (
     <Grid container spacing={2} columns={8}>
@@ -73,14 +94,23 @@ export const OneElement = ({ price }) => {
           renderInput={params => (
             <TextField {...params} label="З ламінацією?" />
           )}
-          // onChange={(_, newValue) => {setPrintingPrice(newValue.price);}}
         />
       </Grid>
       <Grid item xs={1}>
-        <TextField size="small" label="грн." variant="outlined" />
+        <TextField
+          size="small"
+          label="грн."
+          variant="outlined"
+          value={laminationCost}
+        />
       </Grid>
       <Grid item xs={1}>
-        <TextField size="small" label="грн." variant="outlined" />
+        <TextField
+          size="small"
+          label="грн."
+          variant="outlined"
+          value={orderPrice}
+        />
       </Grid>
     </Grid>
   );

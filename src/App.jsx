@@ -9,11 +9,12 @@ export const App = () => {
   const [quality, setQuality] = useState([]);
   const [qualityValue, setQualityValue] = useState('');
   const [printingPrice, setPrintingPrice] = useState('');
+  const [laminationPrice, setLaminationPrice] = useState('');
 
   return (
     <Grid container p="32px" gap="16px">
       <Grid item container spacing={2}>
-        <Grid item xs={7}>
+        <Grid item xs={5}>
           <Typography variant="subtitle2">Оберіть матеріал*</Typography>
         </Grid>
         <Grid item xs={3}>
@@ -22,9 +23,12 @@ export const App = () => {
         <Grid item xs={2}>
           <Typography variant="subtitle2">Вартість друку</Typography>
         </Grid>
+        <Grid item xs={2}>
+          <Typography variant="subtitle2">Вартість ламінації</Typography>
+        </Grid>
       </Grid>
       <Grid item container spacing={2}>
-        <Grid item xs={7}>
+        <Grid item xs={5}>
           <Autocomplete
             size="small"
             options={printingPriceOptions}
@@ -34,8 +38,9 @@ export const App = () => {
             )}
             onChange={(_, newValue) => {
               setQuality(newValue.quality);
-              setPrintingPrice('');
               setQualityValue('');
+              setPrintingPrice('');
+              setLaminationPrice(newValue.lamination_cost);
             }}
           />
         </Grid>
@@ -61,6 +66,15 @@ export const App = () => {
             label="грн./м.кв."
             variant="outlined"
             value={printingPrice}
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <TextField
+            fullWidth
+            size="small"
+            label="грн./м.кв."
+            variant="outlined"
+            value={laminationPrice}
           />
         </Grid>
       </Grid>
@@ -112,7 +126,10 @@ export const App = () => {
         </Grid>
       </Grid>
       <Grid item>
-        <OneElement price={printingPrice} />
+        <OneElement
+          printingPrice={printingPrice}
+          laminationPrice={laminationPrice}
+        />
       </Grid>
     </Grid>
   );
