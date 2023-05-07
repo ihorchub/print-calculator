@@ -87,6 +87,7 @@ export const OneElement = ({ printingPrice, laminationPrice }) => {
       </Grid>
       <Grid item xs={1}>
         <Autocomplete
+          disableClearable
           value={isLamination}
           size="small"
           options={['Так', 'Ні']}

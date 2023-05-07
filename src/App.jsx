@@ -2,23 +2,26 @@
 import { useState } from 'react';
 // import { styled } from '@mui/material';
 import { Grid, Autocomplete, TextField, Typography } from '@mui/material';
-import { printingPriceOptions } from 'helpers/printingPrice';
+import { printingPriceOptions, laminationCost } from 'helpers/printingPrice';
 import { OneElement } from 'components/OneElement/OneElement';
 
 export const App = () => {
   const [quality, setQuality] = useState([]);
   const [qualityValue, setQualityValue] = useState('');
   const [printingPrice, setPrintingPrice] = useState('');
-  const [laminationPrice, setLaminationPrice] = useState('');
+  const [laminationPrice, setLaminationPrice] = useState('0');
 
   return (
     <Grid container p="32px" gap="16px">
       <Grid item container spacing={2}>
-        <Grid item xs={5}>
+        <Grid item xs={4}>
           <Typography variant="subtitle2">Оберіть матеріал*</Typography>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <Typography variant="subtitle2">Оберіть якість друку*</Typography>
+        </Grid>
+        <Grid item xs={2}>
+          <Typography variant="subtitle2">Оберіть варіант ламінації</Typography>
         </Grid>
         <Grid item xs={2}>
           <Typography variant="subtitle2">Вартість друку</Typography>
@@ -28,8 +31,9 @@ export const App = () => {
         </Grid>
       </Grid>
       <Grid item container spacing={2}>
-        <Grid item xs={5}>
+        <Grid item xs={4}>
           <Autocomplete
+            disableClearable
             size="small"
             options={printingPriceOptions}
             getOptionLabel={option => option.material}
@@ -40,12 +44,12 @@ export const App = () => {
               setQuality(newValue.quality);
               setQualityValue('');
               setPrintingPrice('');
-              setLaminationPrice(newValue.lamination_cost);
             }}
           />
         </Grid>
-        <Grid item xs={3}>
+        <Grid item xs={2}>
           <Autocomplete
+            disableClearable
             inputValue={qualityValue}
             size="small"
             options={quality}
@@ -56,6 +60,19 @@ export const App = () => {
             onChange={(_, newValue) => {
               setPrintingPrice(newValue.price);
               setQualityValue(newValue.label);
+            }}
+          />
+        </Grid>
+        <Grid item xs={2}>
+          <Autocomplete
+            disableClearable
+            size="small"
+            options={laminationCost}
+            getOptionLabel={option => option.label}
+            defaultValue={laminationCost[0]}
+            renderInput={params => <TextField {...params} label="Ламінація" />}
+            onChange={(_, newValue) => {
+              setLaminationPrice(newValue.price);
             }}
           />
         </Grid>
