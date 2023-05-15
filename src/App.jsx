@@ -14,7 +14,7 @@ import {
   rowTitles,
   resultTitles,
   resultFields,
-  discountTitles,
+  // discountTitles,
 } from 'mocks/renderTitles';
 import { OneElement } from 'components/OneElement/OneElement';
 
