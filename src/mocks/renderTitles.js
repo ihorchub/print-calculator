@@ -33,3 +33,11 @@ export const resultFields = [
   { width: 2, label: 'грн.', mark: false },
   { width: 2, label: 'грн.', mark: false },
 ];
+
+export const discountTitles = [
+  { width: 2, label: 'Знижка на друк, %' },
+  { width: 2, label: 'Всього друк, грн' },
+  { width: 2, label: 'Знижка на ламінацію, %' },
+  { width: 2, label: 'Всього ламінація, грн' },
+  { width: 2, label: 'Всього замовлення, грн' },
+];

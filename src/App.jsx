@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 // import { styled } from '@mui/material';
 import {
   Grid,
@@ -14,6 +14,7 @@ import {
   rowTitles,
   resultTitles,
   resultFields,
+  discountTitles,
 } from 'mocks/renderTitles';
 import { OneElement } from 'components/OneElement/OneElement';
 
@@ -37,6 +38,13 @@ export const App = () => {
     orderAmount,
   ];
 
+  // const discount = [
+  //   { value: 100, discount: '10%', discountIndex: 0.9 },
+  //   { value: 50, discount: '7%', discountIndex: 0.93 },
+  //   { value: 25, discount: '5%', discountIndex: 0.95 },
+  //   { value: 10, discount: '3%', discountIndex: 0.97 },
+  // ];
+
   const countResult = (data, mark) => {
     const values = Object.values(data);
     let total = 0;
@@ -56,31 +64,29 @@ export const App = () => {
     }
   };
 
-  const printSqrt = countResult(printSquare, true);
-  const LaminateSqrt = countResult(laminationSquare, true);
+  // const printSqrt = countResult(printSquare, true);
+  // const printPrice = countResult(printAmount, false);
+  // const LaminateSqrt = countResult(laminationSquare, true);
 
-  useEffect(() => {
-    const discount = [
-      { value: 100, discountIndex: 0.9 },
-      { value: 50, discountIndex: 0.93 },
-      { value: 25, discountIndex: 0.95 },
-      { value: 10, discountIndex: 0.97 },
-    ];
+  // const printDiscount = () => {
+  //   for (const item of discount) {
+  //     if (printSqrt > item.value) {
+  //       return item.discount;
+  //     }
+  //   }
+  // };
 
-    for (const item of discount) {
-      if (printSqrt > item.value) {
-        setPrintingPrice(prev => prev * item.discountIndex);
-        break;
-      }
-    }
-
-    for (const item of discount) {
-      if (LaminateSqrt > item.value) {
-        setLaminationPrice(prev => prev * item.discountIndex);
-        break;
-      }
-    }
-  }, [LaminateSqrt, printSqrt]);
+  // const discountPrintPrice = () => {
+  //   for (const item of discount) {
+  //     if (printSqrt > item.value) {
+  //       const newPrice = printPrice * item.discountIndex;
+  //       return newPrice.toLocaleString(undefined, {
+  //         minimumFractionDigits: 0,
+  //         maximumFractionDigits: 0,
+  //       });
+  //     }
+  //   }
+  // };
 
   return (
     <Grid container p="32px" gap="16px">
@@ -232,6 +238,37 @@ export const App = () => {
           </Grid>
         ))}
       </Grid>
+      {/* {printSqrt > 10 && (
+        <>
+          <Grid item container spacing={2} columns={12}>
+            {discountTitles.map(({ width, label }) => (
+              <Grid key={label} item xs={width}>
+                <Typography variant="subtitle2" mb={1}>
+                  {label}
+                </Typography>
+              </Grid>
+            ))}
+          </Grid>
+          <Grid item container spacing={2} columns={12}>
+            <Grid item xs={2}>
+              <TextField
+                size="small"
+                label="%"
+                variant="outlined"
+                value={printDiscount()}
+              />
+            </Grid>
+            <Grid item xs={2}>
+              <TextField
+                size="small"
+                label="грн."
+                variant="outlined"
+                value={discountPrintPrice() || '0'}
+              />
+            </Grid>
+          </Grid>
+        </>
+      )} */}
     </Grid>
   );
 };
