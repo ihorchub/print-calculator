@@ -4,10 +4,15 @@ import { useState, useEffect } from 'react';
 export const OneElement = ({
   printingPrice,
   laminationPrice,
+  setPrintSquare,
   setPrintAmount,
+  setLaminationSquare,
   setLaminationAmount,
   setOrderAmount,
   fileNumber,
+  rowNumber,
+  setFileIndex,
+  linesNumber,
 }) => {
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
@@ -26,6 +31,10 @@ export const OneElement = ({
         maximumFractionDigits: 2,
       })
     );
+    setPrintSquare(prev => ({
+      ...prev,
+      ...{ [fileNumber]: itemSqrt },
+    }));
 
     const calculatePrintCost = itemSqrt * printingPrice;
     setPrintCost(
@@ -53,6 +62,10 @@ export const OneElement = ({
           maximumFractionDigits: 0,
         })
       );
+      setLaminationSquare(prev => ({
+        ...prev,
+        ...{ [fileNumber]: itemSqrt },
+      }));
       setLaminationAmount(prev => ({
         ...prev,
         ...{ [fileNumber]: calculateLamination },
@@ -69,6 +82,10 @@ export const OneElement = ({
           maximumFractionDigits: 0,
         })
       );
+      setLaminationSquare(prev => ({
+        ...prev,
+        ...{ [fileNumber]: 0 },
+      }));
       setLaminationAmount(prev => ({
         ...prev,
         ...{ [fileNumber]: 0 },
@@ -88,20 +105,22 @@ export const OneElement = ({
     printCost,
     printingPrice,
     setLaminationAmount,
+    setLaminationSquare,
     setOrderAmount,
     setPrintAmount,
+    setPrintSquare,
     sqrt,
     width,
   ]);
 
   return (
-    <Grid container spacing={2} columns={18}>
+    <Grid container spacing={2} columns={18} className="itemRow">
       <Grid item xs={1}>
         <TextField
           size="small"
           label="n"
           variant="outlined"
-          value={fileNumber}
+          value={rowNumber}
         />
       </Grid>
       <Grid item xs={2}>
@@ -180,6 +199,7 @@ export const OneElement = ({
       </Grid>
       <Grid item xs={1}>
         <Button
+          disabled={linesNumber === 1}
           size="medium"
           variant="outlined"
           sx={{
@@ -189,6 +209,21 @@ export const OneElement = ({
             color: 'orange',
             borderColor: 'orange',
             ':hover': { color: 'orangered', borderColor: 'orangered' },
+          }}
+          onClick={() => {
+            setFileIndex(prev => prev.filter(value => value !== fileNumber));
+            setPrintAmount(prev => ({
+              ...prev,
+              ...{ [fileNumber]: 0 },
+            }));
+            setLaminationAmount(prev => ({
+              ...prev,
+              ...{ [fileNumber]: 0 },
+            }));
+            setOrderAmount(prev => ({
+              ...prev,
+              ...{ [fileNumber]: 0 },
+            }));
           }}
         >
           X

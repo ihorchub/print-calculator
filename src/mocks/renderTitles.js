@@ -17,3 +17,19 @@ export const rowTitles = [
   { width: 2, text: 'Вартість ламінації' },
   { width: 2, text: 'Вартість замовлення' },
 ];
+
+export const resultTitles = [
+  { width: 2, text: 'Всього друк, м.кв.' },
+  { width: 2, text: 'Всього друк, грн' },
+  { width: 2, text: 'Всього ламінація, м.кв' },
+  { width: 2, text: 'Всього ламінація, грн' },
+  { width: 2, text: 'Всього замовлення, грн' },
+];
+
+export const resultFields = [
+  { width: 2, label: 'м.кв.', mark: true },
+  { width: 2, label: 'грн.', mark: false },
+  { width: 2, label: 'м.кв.', mark: true },
+  { width: 2, label: 'грн.', mark: false },
+  { width: 2, label: 'грн.', mark: false },
+];

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 // import { styled } from '@mui/material';
 import {
   Grid,
@@ -9,7 +9,12 @@ import {
   Box,
 } from '@mui/material';
 import { printingPriceOptions, laminationCost } from 'mocks/printingPrice';
-import { headingTitles, rowTitles } from 'mocks/renderTitles';
+import {
+  headingTitles,
+  rowTitles,
+  resultTitles,
+  resultFields,
+} from 'mocks/renderTitles';
 import { OneElement } from 'components/OneElement/OneElement';
 
 export const App = () => {
@@ -17,22 +22,65 @@ export const App = () => {
   const [qualityValue, setQualityValue] = useState('');
   const [printingPrice, setPrintingPrice] = useState(0);
   const [laminationPrice, setLaminationPrice] = useState(0);
-  const [numberOfFiles, setNumberOfFiles] = useState([1]);
+  const [fileIndex, setFileIndex] = useState([1]);
+  const [printSquare, setPrintSquare] = useState({ 0: 0 });
   const [printAmount, setPrintAmount] = useState({ 0: 0 });
+  const [laminationSquare, setLaminationSquare] = useState({ 0: 0 });
   const [laminationAmount, setLaminationAmount] = useState({ 0: 0 });
   const [orderAmount, setOrderAmount] = useState({ 0: 0 });
 
-  const countResult = data => {
+  const resultArr = [
+    printSquare,
+    printAmount,
+    laminationSquare,
+    laminationAmount,
+    orderAmount,
+  ];
+
+  const countResult = (data, mark) => {
     const values = Object.values(data);
     let total = 0;
     for (const value of values) {
       total += value;
     }
-    return total.toLocaleString(undefined, {
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    });
+    if (mark) {
+      return total.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+    } else {
+      return total.toLocaleString(undefined, {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+      });
+    }
   };
+
+  const printSqrt = countResult(printSquare, true);
+  const LaminateSqrt = countResult(laminationSquare, true);
+
+  useEffect(() => {
+    const discount = [
+      { value: 100, discountIndex: 0.9 },
+      { value: 50, discountIndex: 0.93 },
+      { value: 25, discountIndex: 0.95 },
+      { value: 10, discountIndex: 0.97 },
+    ];
+
+    for (const item of discount) {
+      if (printSqrt > item.value) {
+        setPrintingPrice(prev => prev * item.discountIndex);
+        break;
+      }
+    }
+
+    for (const item of discount) {
+      if (LaminateSqrt > item.value) {
+        setLaminationPrice(prev => prev * item.discountIndex);
+        break;
+      }
+    }
+  }, [LaminateSqrt, printSqrt]);
 
   return (
     <Grid container p="32px" gap="16px">
@@ -126,17 +174,22 @@ export const App = () => {
         display={'flex'}
         flexDirection={'column'}
         alignItems={'end'}
-        gap={'10px'}
+        gap={'15px'}
       >
-        {numberOfFiles.map(item => (
+        {fileIndex.map((item, idx) => (
           <OneElement
             key={item}
             printingPrice={printingPrice}
             laminationPrice={laminationPrice}
+            setPrintSquare={setPrintSquare}
             setPrintAmount={setPrintAmount}
+            setLaminationSquare={setLaminationSquare}
             setLaminationAmount={setLaminationAmount}
             setOrderAmount={setOrderAmount}
             fileNumber={item}
+            rowNumber={idx + 1}
+            setFileIndex={setFileIndex}
+            linesNumber={fileIndex.length}
           />
         ))}
 
@@ -151,53 +204,33 @@ export const App = () => {
             borderColor: 'lightgreen',
             ':hover': { color: 'green', borderColor: 'green' },
           }}
-          onClick={() => setNumberOfFiles(prev => [...prev, prev.length + 1])}
+          onClick={() =>
+            setFileIndex(prev => [...prev, prev[prev.length - 1] + 1])
+          }
         >
           +рядок
         </Button>
       </Box>
       <Grid item container spacing={2} columns={12} mt={2}>
-        <Grid item xs={2}>
-          <Typography variant="subtitle2" mb={1}>
-            Всього друк, грн
-          </Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Typography variant="subtitle2" mb={1}>
-            Всього ламінація, грн
-          </Typography>
-        </Grid>
-        <Grid item xs={2}>
-          <Typography variant="subtitle2" mb={1}>
-            Всього замовлення, грн
-          </Typography>
-        </Grid>
+        {resultTitles.map(({ width, text }) => (
+          <Grid key={text} item xs={width}>
+            <Typography variant="subtitle2" mb={1}>
+              {text}
+            </Typography>
+          </Grid>
+        ))}
       </Grid>
       <Grid item container spacing={2} columns={12}>
-        <Grid item xs={2}>
-          <TextField
-            size="small"
-            label="грн."
-            variant="outlined"
-            value={countResult(printAmount)}
-          />
-        </Grid>
-        <Grid item xs={2}>
-          <TextField
-            size="small"
-            label="грн."
-            variant="outlined"
-            value={countResult(laminationAmount)}
-          />
-        </Grid>
-        <Grid item xs={2}>
-          <TextField
-            size="small"
-            label="грн."
-            variant="outlined"
-            value={countResult(orderAmount)}
-          />
-        </Grid>
+        {resultFields.map(({ width, label, mark }, idx) => (
+          <Grid key={idx} item xs={width}>
+            <TextField
+              size="small"
+              label={label}
+              variant="outlined"
+              value={countResult(resultArr[idx], mark)}
+            />
+          </Grid>
+        ))}
       </Grid>
     </Grid>
   );
